@@ -9,7 +9,7 @@ Tensorflow 2.2.0
 
 Keras 2.4.3 - note that this would need to be downgraded to 2.2.4 to convert h5 to mlmodel
 
-Numpy 1.16.4 (this isn't the newest version but this prevents tensorflow from printing bunch of future warning )
+Numpy 1.16.4 (this isn't the newest version but this prevents tensorflow from printing bunch of future warning)
 
 matplotlib (newest version)
 
@@ -23,26 +23,17 @@ corelmltools 3.2
 
 
 ## Getting the Data / Training your model
-If you want to create a model for either Hiragana, Katakana, or Kanji, the data can be downloaded from the ETL database website. See Reference below.
+The data for Hiragana, Katakana, and Kanji can be downloaded from the ETL database website. The data for Kuzushiji can be found in the KMINST database. See Reference below.
 
-After doing so, run the python programs in the corresponding files (Hiragana, Katakana, or Kanji) in this order to extract the data:
+`read_{hira, kana, kanj}.py` - save the whole data into one npz file 
 
-`read_{hira, kana, kanj}.py` (saves the whole data into one npz file) --> `modify_{hira, kana, kanj}.py` (creates the train_images, train_labels, test_images, and test_labels files)
+`modify_{hira, kana, kanj}.py` - create the train_images, train_labels, test_images, and test_labels files
 
+`{hiragana, katakana, kanji}_CNN.py` - create a h5 model
 
-To use the exact same model that I created, run `{hiragana, katakana, kanji}_CNN.py` (creates a h5 model)
-
+`convert_{hiragana, katakana, kanji}.py` - convert h5 to mlmodel (See Additional Notes below to run this python file without any errors.)
 
 To create your own model, load the saved arrays by: `arr = np.load(filename)['arr_0']`.
-
-
-To convert your h5 file to mlmodel (the main purpose of this is to use the model to create an app), run `convert_{hiragana, katakana, kanji}.py`
-
-
-See Additional Notes below to run this python file without any errors.
-
-If you want to create a model for Kuzushiji, the data can be found in the KMINST database. See Reference below.
-
 
 ## Results
 
@@ -50,8 +41,7 @@ If you want to create a model for Kuzushiji, the data can be found in the KMINST
 |---|---|---|---|---|
 |Accuracy|98.4%|98.6%|98.6%|95.6%|
 
-note: these are the results I got after running the CNN models, results may vary slightly in every trial.
-
+Note: these are the results I got after running the CNN models, results may vary slightly in every trial.
 
 
 ## Additional Notes
@@ -60,26 +50,20 @@ If tensorflow doesn't work at first, try running this command:
 /Applications/Python 3.7/Install Certificates.command
 ```
 
-
 When converting h5 to mlmodel, downgrade keras 2.4.3 to keras 2.2.4.
 
 To fix potential errors, run the following command:
 ```
 tf_upgrade_v2 --infile /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py --outfile /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py
 ```
-I also had to go into the optimizers.py file within keras and manually change this in line 75:
+Also, go into the optimizers.py file within keras and manually change this in line 75:
 
-original:
-```
-allowed_kwargs = {'clipnorm', 'clipvalue'}
-```
-changed version:
-```
-allowed_kwargs = {'clipnorm', 'clipvalue','name','learning_rate'}
-```
+original:`allowed_kwargs = {'clipnorm', 'clipvalue'}`
+
+changed version:`allowed_kwargs = {'clipnorm', 'clipvalue','name','learning_rate'}`
 
 ## Creating an App
-To see how I used the mlmodels to create an App, go to my github page on [Japanese-ML-App](https://github.com/Nippon2019/Japanese-ML-App)
+Check out how I created a handwriting recognition app on my github page [Japanese-ML-App](https://github.com/Nippon2019/Japanese-ML-App)
 
 ## License 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
