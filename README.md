@@ -1,7 +1,6 @@
 # Handwritten Japanese Recognition
 Create a model that recognizing handwritten Japanese characters, including Hiragana, Katakana, Kanji, and Kuzushiji, using Tensorflow. 
 
-
 ## Prerequisites and Installations
 Python 3.7 (any python3 versions should work)
 
@@ -21,7 +20,6 @@ sklearn (newest version)
 
 corelmltools 3.2
 
-
 ## Getting the Data / Training your model
 The data for Hiragana, Katakana, and Kanji can be downloaded from the ETL database website. The data for Kuzushiji can be found in the KMINST database. See Reference below.
 
@@ -33,8 +31,6 @@ The data for Hiragana, Katakana, and Kanji can be downloaded from the ETL databa
 
 `convert_{hiragana, katakana, kanji}.py` - convert h5 to mlmodel (See Additional Notes below to run this python file without any errors.)
 
-To create your own model, load the saved arrays by: `arr = np.load(filename)['arr_0']`.
-
 ## Results
 
 |Model   |Hiragana|Katakana|Kanji|Kuzushiji|
@@ -43,12 +39,8 @@ To create your own model, load the saved arrays by: `arr = np.load(filename)['ar
 
 Note: these are the results I got after running the CNN models, results may vary slightly in every trial.
 
-
 ## Additional Notes
-If tensorflow doesn't work at first, try running this command:
-```
-/Applications/Python 3.7/Install Certificates.command
-```
+If tensorflow doesn't work at first, try running this command: `/Applications/Python 3.7/Install Certificates.command`
 
 When converting h5 to mlmodel, downgrade keras 2.4.3 to keras 2.2.4.
 
@@ -61,12 +53,6 @@ Also, go into the optimizers.py file within keras and manually change this in li
 original:`allowed_kwargs = {'clipnorm', 'clipvalue'}`
 
 changed version:`allowed_kwargs = {'clipnorm', 'clipvalue','name','learning_rate'}`
-
-## Creating an App
-Check out how I created a handwriting recognition app on my github page [Japanese-ML-App](https://github.com/Nippon2019/Japanese-ML-App)
-
-## License 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
 
 ## References
 1. Electrotechnical Laboratory, Japanese Technical Committee for Optical Character Recognition, ETL Character Database, 1973-1984.
